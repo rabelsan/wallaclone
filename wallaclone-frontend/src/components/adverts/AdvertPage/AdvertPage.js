@@ -60,13 +60,13 @@ function AdvertPage ({ history, delAd, getAd, processing, errChange, advert, t }
       <Row>
         <Col span={24}>
           <Title level={2}>
-            {name} - {sale ? 'Sell' : 'Buy'}
+            {name} - {sale ? t('Sell') : t('Buy')}
           </Title>
         </Col>
         <Col span={12}>
-          <Statistic title="Price" value={price} formatter={formatter} />
+          <Statistic title={t("Price")} value={price} formatter={formatter} />
           <div style={{ marginTop: 20 }}>
-            <span style={{ marginRight: 5 }}>Tags</span>
+            <span style={{ marginRight: 5 }}>{t("Tags")}</span>
             <Tags tags={tags} />
           </div>
         </Col>
@@ -84,10 +84,10 @@ function AdvertPage ({ history, delAd, getAd, processing, errChange, advert, t }
           danger
           icon={<DeleteOutlined />}
           confirmationProps={{
-            title: t('Delete advert?'),
-            content: 'Are you sure you want to delete this advert?',
-            okText: 'Yes',
-            cancelText: 'No',
+            title: t('Delete advert'),
+            content: t('Are you sure you want to delete this advert?'),
+            okText: t('Yes'),
+            cancelText: t('No'),
             okButtonProps: {
               danger: true,
             },
@@ -104,7 +104,7 @@ function AdvertPage ({ history, delAd, getAd, processing, errChange, advert, t }
   };
 
   return (
-    <Layout title="Advert detail">
+    <Layout title={t('Advert detail')}>
       <Divider>{t('Detail of your advert')}</Divider>
       {renderAdvert()}
     </Layout>

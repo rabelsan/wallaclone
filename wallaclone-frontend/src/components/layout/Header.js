@@ -1,5 +1,5 @@
 import React from 'react';
-import i18n from '../../i18n';
+import i18n from '../../utils/i18n';
 import { Link } from 'react-router-dom';
 import { Layout as DesignLayout, Space } from 'antd';
 
@@ -24,7 +24,7 @@ const Header = ({t}) => (
       <button onClick={() => changeLanguage('es')}>es</button>
       <button onClick={() => changeLanguage('en')}>en</button>
     </div>
-      <LogoutButton className={styles.button}>Logout</LogoutButton>
+      <LogoutButton className={styles.button}>{t('Logout')}</LogoutButton>
     </Space>
   </DesignHeader>
 );

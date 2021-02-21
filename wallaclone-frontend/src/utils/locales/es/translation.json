@@ -1,6 +1,7 @@
 {
     "Adverts": "Anuncios",
     "New advert": "Nuevo anuncio",
+    "Advert detail":"Detalle anuncio",
     "Log In": "Acceso",
     "Logout": "Salir",
     "Email": "Correo electrónico",
@@ -13,6 +14,9 @@
     "Filter your adverts":"Filtra tus anuncios",
     "Price":"Precio",
     "Name":"Nombre",
+    "Tags":"Etiquetas",
+    "Type":"Tipo",
+    "Photo":"Foto",
     "Select tags":"Seleciona etiquetas",
     "By name":"Por nombre",
     "By price":"Por precio",
@@ -21,9 +25,16 @@
     "Search":"Buscar",
     "Adverts list":"Lista de anuncios",
     "Delete":"Borrar",
-    "Delete advert?":"¿Borrar anuncio?",
-    "Detail of your advert":"Detalle del anuncio",
+    "Delete advert":"Borrar anuncio",
+    "Are you sure you want to delete this advert?":"¿Seguro que quieres borrarlo?",
+    "Detail of your advert":"Detalles de tu anuncio",
     "Sell":"En venta",
     "Buy":"Comprar",
-    "All":"Todos"                  
+    "All":"Todos",
+    "Close session":"Cerrar sesión",
+    "Are you sure you want to disconnect?":"¿Seguro que quieres desconectar?",
+    "Yes":"Sí",
+    "No":"No",
+    "Create an advert":"Crear un anuncio",
+    "Up!":"¡Subir!"                  
 }

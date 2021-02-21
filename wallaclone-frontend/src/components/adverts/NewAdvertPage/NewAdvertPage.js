@@ -9,7 +9,8 @@ import { getAdDetails } from '../../../store/selectors';
 
 import Layout from '../../layout';
 import NewAdvertForm from './NewAdvertForm';
-function NewAdvertPage ({ history, newAd, getAd, errChange, advert, isNew }) {
+import { withNamespaces } from 'react-i18next';
+function NewAdvertPage ({ history, newAd, getAd, errChange, advert, isNew, t }) {
   useEffect ( () => {
     if (advert && isNew) {
       if (!advert.hasOwnProperty('photoUrl')) {
@@ -27,8 +28,8 @@ function NewAdvertPage ({ history, newAd, getAd, errChange, advert, isNew }) {
   };
 
   return (
-    <Layout title="New advert">
-      <Divider>Create an advert</Divider>
+    <Layout title={t("New advert")}>
+      <Divider>{t("Create an advert")}</Divider>
       <NewAdvertForm onSubmit={handleSubmit} />
       {errChange && (
         <Alert
@@ -56,4 +57,4 @@ NewAdvertPage.propTypes = {
 export default connect(getAdDetails, dispatch => ({
   newAd: (id) => dispatch(createAd(id)),
   getAd: (id, isNew) => dispatch(loadAd(id, isNew)),
-}))(NewAdvertPage);
+}))(withNamespaces()(NewAdvertPage));

@@ -10,11 +10,12 @@ import TagsSelect from '../TagsSelect';
 import { FormField, InputImage } from '../../shared';
 import * as numbers from '../../../utils/numbers';
 
-import { saleOptions, MIN_PRICE, MAX_PRICE } from '../definitions';
+import { saleOptions, saleOptionsT, translateOptions, MIN_PRICE, MAX_PRICE } from '../definitions';
 
 import styles from './NewAdvertForm.module.css';
+import { withNamespaces } from 'react-i18next';
 
-function NewAdvertForm ({ onSubmit, list }) {
+function NewAdvertForm ({ onSubmit, list, t }) {
   const [state, setState] = useState({
     name: '',
     price: 0,
@@ -59,19 +60,21 @@ function NewAdvertForm ({ onSubmit, list }) {
   };
 
   const { name, price, tags, sale } = state;
+
+  translateOptions(saleOptions, saleOptionsT);
     
   return (
     <form onSubmit={handleSubmit}>
       <Row className={styles.form}>
         <Col span={11}>
-          <FormField label="Name">
+          <FormField label={t("Name")}>
             <Input
-              placeholder="Name"
+              placeholder={t("Name")}
               onChange={handleNameChange}
               value={name}
             />
           </FormField>
-          <FormField label="Price">
+          <FormField label={t("Price")}>
             <InputNumber
               {...numbers}
               className={styles.price}
@@ -83,19 +86,19 @@ function NewAdvertForm ({ onSubmit, list }) {
           </FormField>
         </Col>
         <Col span={11} offset={2}>
-          <FormField label="Tags">
+          <FormField label={t("Tags")}>
             <TagsSelect onChange={handleTagsChange} options={list} value={tags}/>
           </FormField>
-          <FormField label="Type">
+          <FormField label={t("Type")}>
             <Radio.Group
-              options={[saleOptions.sell, saleOptions.buy]}
+              options={[saleOptionsT.sell, saleOptionsT.buy]}
               onChange={handleSaleChange}
               value={sale}
             />
           </FormField>
         </Col>
         <Col span={24}>
-          <FormField label="Photo">
+          <FormField label={t("Photo")}>
             <InputImage type="file" onChange={handlePhotoChange} />
           </FormField>
           <Button
@@ -105,7 +108,7 @@ function NewAdvertForm ({ onSubmit, list }) {
             disabled={!canSubmit()}
             block
           >
-            Up!
+            {t("Up!")}
           </Button>
         </Col>
       </Row>
@@ -118,4 +121,4 @@ NewAdvertForm.propTypes = {
   list: T.arrayOf(T.string),
 };
 
-export default connect(getTags) (NewAdvertForm);
+export default connect(getTags) (withNamespaces()(NewAdvertForm));

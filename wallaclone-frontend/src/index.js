@@ -7,7 +7,7 @@ import { configureClient } from './api/client';
 import storage from './utils/storage';
 import App, { Root } from './components/App';
 import { configureStore } from './store';
-import './i18n';
+import './utils/i18n';
 import './index.css';
 
 // Read token from storage
