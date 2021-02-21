@@ -6,15 +6,16 @@ import { Alert, Col, Row, Typography } from 'antd';
 import { login } from '../../../store/actions';
 import LoginForm from './LoginForm';
 import { getUi } from '../../../store/selectors';
+import { withNamespaces } from 'react-i18next';
 
 
 const { Title } = Typography;
 
-function LoginPage ({ onLogin, loading, error}) {
+function LoginPage ({ onLogin, loading, error, t}) {
   return (
     <Row>
       <Col span={8} offset={8} style={{ marginTop: 64 }}>
-        <Title style={{ textAlign: 'center' }}>Log In</Title>
+        <Title style={{ textAlign: 'center' }}>{t('Log In')}</Title>
         <LoginForm onSubmit={onLogin} loading={loading}/>
         {error && (
           <Alert
@@ -39,5 +40,5 @@ LoginPage.propTypes = {
 
 export default connect(getUi, dispatch => ({
   onLogin: (crendentials, history) => dispatch(login(crendentials, history)),
-}))(LoginPage);
+}))(withNamespaces()(LoginPage));
 

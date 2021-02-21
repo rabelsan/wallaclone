@@ -1,30 +1,43 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
 import T from 'prop-types';
 import { Select } from 'antd';
+import { withNamespaces } from 'react-i18next';
+import {getTags} from '../../store/selectors';
+import {loadTags} from '../../store/actions';
 
 const { Option } = Select;
+function TagsSelect ({findTags, onChange, list, defaultValue, t}) {
+  
+  useEffect( 
+    () => { findTags(); }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    , []
+  );
 
-function TagsSelect ({onChange, options, defaultValue}) {
   return (
     <Select
       allowClear
-      disabled={!options}
+      disabled={!list}
       mode="multiple"
-      placeholder="Select tags"
+      placeholder={t("Select tags")}
       defaultValue={defaultValue}
       onChange={onChange}
       style={{ width: '100%' }}
     >
-      {options && options.map(tag => <Option key={tag}>{tag}</Option>)}
+      {list && list.map(tag => <Option key={tag}>{tag}</Option>)}
     </Select>
   );
 }
 
 TagsSelect.propTypes = {
   onChange: T.func.isRequired,
-  options: T.arrayOf(T.string).isRequired,
+  list: T.arrayOf(T.string).isRequired,
   value: T.arrayOf(T.string),
+  tagsList: T.arrayOf(T.string),
 };
 
-export default TagsSelect;
+export default connect(getTags, dispatch => ({
+  findTags: () => dispatch(loadTags()),
+}))(withNamespaces()(TagsSelect));
 

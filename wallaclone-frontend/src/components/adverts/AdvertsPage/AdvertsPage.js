@@ -11,8 +11,9 @@ import AdvertCard from './AdvertCard';
 
 import { loadAds } from '../../../store/actions';
 import { getAds } from '../../../store/selectors';
+import { withNamespaces } from 'react-i18next';
 
-function AdvertsPage  ({adverts, loading, error, filterAds, history}) {
+function AdvertsPage  ({adverts, loading, error, filterAds, history, t}) {
   const [form, setForm] = useState({
     filters: storage.get('filters') || defaultFilters,
   });
@@ -66,7 +67,7 @@ function AdvertsPage  ({adverts, loading, error, filterAds, history}) {
         description={<span style={{ color: '#ff4d4f' }}>{`${error}`}</span>}
       >
         <Button type="primary" danger onClick={handleReloadClick}>
-          Reload
+          {t('Reload')}
         </Button>
       </Empty>
     );
@@ -77,12 +78,12 @@ function AdvertsPage  ({adverts, loading, error, filterAds, history}) {
     const isFiltered =
       JSON.stringify(filters) !== JSON.stringify(defaultFilters);
     return (
-      <Empty description={<span>No adverts here!</span>}>
+      <Empty description={<span>{t('No adverts here!')}</span>}>
         {isFiltered ? (
-          <span>Refine your search</span>
+          <span>{t('Refine your search')}</span>
         ) : (
           <Link to="/adverts/new">
-            <Button type="primary">Create the first one</Button>
+            <Button type="primary">{t('Create the first one')}</Button>
           </Link>
         )}
       </Empty>
@@ -126,10 +127,10 @@ function AdvertsPage  ({adverts, loading, error, filterAds, history}) {
   };
 
   return (
-    <Layout title="Adverts list">
-      <Divider>Filter your adverts</Divider>
+    <Layout title={t("Adverts list")}>
+      <Divider>{t('Filter your adverts')}</Divider>
       <FiltersForm initialFilters={form.filters} onSubmit={handleSubmit} />
-      <Divider>Adverts</Divider>
+      <Divider>{t('Adverts')}</Divider>
       {renderAdverts()}
     </Layout>
   );
@@ -145,4 +146,4 @@ AdvertsPage.propTypes = {
 
 export default connect(getAds, dispatch => ({
   filterAds: (filters) => dispatch(loadAds(filters)),
-}))(AdvertsPage);
+}))(withNamespaces()(AdvertsPage));

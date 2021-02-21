@@ -4,7 +4,6 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import { PrivateRoute, LoginPage } from '../auth';
 import { AdvertPage, AdvertsPage, NewAdvertPage } from '../adverts';
 import NotFoundPage from './NotFoundPage';
-import '../../i18n/i18n';
 
 function App () {
   return (

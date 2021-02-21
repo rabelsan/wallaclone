@@ -1,13 +1,13 @@
 import React from 'react';
 import T from 'prop-types';
-import { Button, Checkbox } from 'antd';
+import { Input, Button, Checkbox } from 'antd';
 import { MailOutlined, LockOutlined } from '@ant-design/icons';
-import InputWrapper from '../../../utils/InputWrapper';
+import { withNamespaces } from 'react-i18next';
 
 import useForm from '../../../hooks/useForm';
 import styles from './LoginForm.module.css';
 
-function LoginForm({ onSubmit, loading }) {
+function LoginForm({ onSubmit, loading, t }) {
   const [form, handleChange] = useForm({
     email: '',
     password: '',
@@ -27,21 +27,21 @@ function LoginForm({ onSubmit, loading }) {
 
   return (
     <form onSubmit={handleSubmit}>
-      <InputWrapper 
+      <Input 
         inputType={null}
         name="email"
         className="styles.input"
         prefix={<MailOutlined />}
-        placeholder="Email"
+        placeholder={t("Email")}
         onChange={handleChange}
         value={email}
       />
-      <InputWrapper
+      <Input
         inputType="Password"
         name="password"
         className="styles.input"
         prefix={<LockOutlined />}
-        placeholder="Password"
+        placeholder={t("Password")}
         onChange={handleChange}
         value={password}
       />
@@ -51,10 +51,10 @@ function LoginForm({ onSubmit, loading }) {
         onChange={handleChange}
         checked={remember}
       >
-        Remember me
+        {t('Remember me')}
       </Checkbox>
       <Button type="primary" htmlType="submit" disabled={!canSubmit()} block>
-        Log In
+        {t('Log In')}
       </Button>
     </form>
   );
@@ -64,4 +64,4 @@ LoginForm.propTypes = {
   onSubmit: T.func.isRequired,
 };
 
-export default LoginForm;
+export default withNamespaces()(LoginForm);

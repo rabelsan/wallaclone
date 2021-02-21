@@ -14,9 +14,11 @@ import { DeleteOutlined } from '@ant-design/icons';
 import placeholder from '../../../assets/photo-placeholder.png';
 import Tags from '../Tags';
 import { formatter } from '../../../utils/numbers';
+import { withNamespaces } from 'react-i18next';
+
 
 const { Title } = Typography;
-function AdvertPage ({ history, delAd, getAd, processing, errChange, advert })  {
+function AdvertPage ({ history, delAd, getAd, processing, errChange, advert, t })  {
   const { id } = useParams();
   
   useEffect( () => {
@@ -82,7 +84,7 @@ function AdvertPage ({ history, delAd, getAd, processing, errChange, advert })  
           danger
           icon={<DeleteOutlined />}
           confirmationProps={{
-            title: 'Delete advert?',
+            title: t('Delete advert?'),
             content: 'Are you sure you want to delete this advert?',
             okText: 'Yes',
             cancelText: 'No',
@@ -94,7 +96,7 @@ function AdvertPage ({ history, delAd, getAd, processing, errChange, advert })  
           style={{ marginTop: 20 }}
           block
         >
-          Delete
+          {t('Delete')}
         </ConfirmationButton>
         {rendererrChange(errChange)}
       </Row>
@@ -103,7 +105,7 @@ function AdvertPage ({ history, delAd, getAd, processing, errChange, advert })  
 
   return (
     <Layout title="Advert detail">
-      <Divider>Detail of your advert</Divider>
+      <Divider>{t('Detail of your advert')}</Divider>
       {renderAdvert()}
     </Layout>
   );
@@ -121,4 +123,4 @@ AdvertPage.propTypes = {
 export default connect(getAdDetails, dispatch => ({
   delAd: (id) => dispatch(deleteAd(id)),
   getAd: (id) => dispatch(loadAd(id)),
-}))(AdvertPage);
+}))(withNamespaces()(AdvertPage));

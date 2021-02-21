@@ -1,15 +1,17 @@
-import React, {useState, useEffect} from 'react';
-import { connect } from 'react-redux';
+import React, {useState} from 'react';
+//import { connect } from 'react-redux';
 import T from 'prop-types';
 import { Button, Input, Slider, Radio, Row, Col } from 'antd';
 
 import TagsSelect from '../TagsSelect';
 import FormField from '../../shared/FormField';
-import { saleOptions, MIN_PRICE, MAX_PRICE } from '../definitions';
+import { saleOptions, saleOptionsT, translateOptions, MIN_PRICE, MAX_PRICE } from '../definitions';
 import styles from './FiltersForm.module.css';
 
-import {loadTags} from '../../../store/actions';
-import {getTags} from '../../../store/selectors';
+//import {loadTags} from '../../../store/actions';
+//import {getTags} from '../../../store/selectors';
+import { withNamespaces } from 'react-i18next';
+
 
 export const defaultFilters = {
   name: '',
@@ -18,15 +20,8 @@ export const defaultFilters = {
   tags: [],
 };
 
-function FiltersForm ({findTags, list, initialFilters, onSubmit}) {
+function FiltersForm ({list, initialFilters, onSubmit, t}) {
   const [filters, setFilters] = useState(initialFilters);
-
-  useEffect( 
-    () => { findTags(); }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    , []
-  );
-
 
   const handleNameChange = ev => setFilters({ ...filters, name: ev.target.value });
   const handlePriceChange = price => {
@@ -49,13 +44,15 @@ function FiltersForm ({findTags, list, initialFilters, onSubmit}) {
   const { name, price, tags, sale } = filters;
   const priceValue = price.length === 0 ? [MIN_PRICE, MAX_PRICE] : price;
 
+  translateOptions(saleOptions, saleOptionsT);
+  
   return (
     <form onSubmit={handleSubmit}>
       <Row className={styles.form}>
         <Col span={11}>
-          <FormField label="By name">
+          <FormField label={t("By name")}>
             <Input
-              placeholder="Name"
+              placeholder={t("Name")}
               onChange={handleNameChange}
               value={name}
             />
@@ -63,7 +60,7 @@ function FiltersForm ({findTags, list, initialFilters, onSubmit}) {
           <FormField
             label={
               <>
-                By price
+                {t('By price')}
                 <strong style={{ margin: '0 5px' }}>
                   {priceValue.join(' - ')}
                 </strong>
@@ -80,12 +77,12 @@ function FiltersForm ({findTags, list, initialFilters, onSubmit}) {
           </FormField>
         </Col>
         <Col span={11} offset={2}>
-          <FormField label="By tags">
-            <TagsSelect onChange={handleTagsChange} options={list} defaultValue={tags}/>
+          <FormField label={t("By tags")}>
+            <TagsSelect onChange={handleTagsChange} default={tags}/> 
           </FormField>
-          <FormField label="By type">
+          <FormField label={t("By type")}>
             <Radio.Group
-              options={Object.values(saleOptions)}
+              options={  Object.values(saleOptionsT) }
               onChange={handleSaleChange}
               value={sale}
             />
@@ -98,7 +95,7 @@ function FiltersForm ({findTags, list, initialFilters, onSubmit}) {
             htmlType="submit"
             block
           >
-            Search
+            {t('Search')}
           </Button>
         </Col>
       </Row>
@@ -111,7 +108,7 @@ FiltersForm.propTypes = {
     name: T.string,
     sale: T.oneOf(Object.keys(saleOptions)),
     price: T.arrayOf(T.number),
-    tagsList: T.arrayOf(T.string),
+    //tagsList: T.arrayOf(T.string),
   }),
   onSubmit: T.func.isRequired,
 };
@@ -120,6 +117,4 @@ FiltersForm.defaultProps = {
   initialFilters: defaultFilters,
 };
 
-export default connect(getTags, dispatch => ({
-  findTags: () => dispatch(loadTags()),
-}))(FiltersForm);
+export default withNamespaces()(FiltersForm);
