@@ -1,5 +1,5 @@
 
-# NodePop Avanzado
+# Wallaclone Avanzado
 
 [Demo](/anuncios) of the methods (this link works only if you run the project)
 

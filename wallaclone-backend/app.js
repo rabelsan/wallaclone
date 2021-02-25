@@ -40,7 +40,7 @@ app.use('/apiv1/auth', require('./routes/apiv1/authenticate'));
 app.use('/apiv1/adverts', jwtAuth(), require('./routes/apiv1/anuncios'));
 
 // Global Template variables
-app.locals.title = 'NodePop';
+app.locals.title = 'Wallaclone';
 
 // Web
 app.use('/', require('./routes/index'));
