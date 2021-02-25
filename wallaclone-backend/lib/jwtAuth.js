@@ -1,3 +1,5 @@
+/* eslint-disable semi */
+/* eslint-disable no-unused-vars */
 'use strict';
 
 const jwt = require('jsonwebtoken');

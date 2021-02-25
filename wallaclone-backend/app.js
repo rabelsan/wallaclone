@@ -1,3 +1,4 @@
+/* eslint-disable semi */
 'use strict';
 
 const express = require('express');
@@ -37,7 +38,8 @@ app.use(i18n.init);
 
 // API v1
 app.use('/apiv1/auth', require('./routes/apiv1/authenticate'));
-app.use('/apiv1/adverts', jwtAuth(), require('./routes/apiv1/anuncios'));
+// app.use('/apiv1/adverts', jwtAuth(), require('./routes/apiv1/anuncios'));
+app.use('/apiv1/adverts', require('./routes/apiv1/anuncios'));
 
 // Global Template variables
 app.locals.title = 'Wallaclone';
