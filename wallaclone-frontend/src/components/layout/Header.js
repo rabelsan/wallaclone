@@ -19,11 +19,15 @@ const Header = ({t}) => (
       <Link to="/">{t('Adverts')}</Link>
       <Link to="/adverts/new">{t('New advert')}</Link>
     </Space>
+    <Space size="large">
+      <Link to="/">{t('Sign up')}</Link>
+      <Link to="/login">{t('Login')}</Link>
+    </Space>
     <Space size="small">
-    <div>
-      <button onClick={() => changeLanguage('es')}>es</button>
-      <button onClick={() => changeLanguage('en')}>en</button>
-    </div>
+      <div className={styles.div}>
+        <button onClick={() => changeLanguage('es')}>es</button>
+        <button onClick={() => changeLanguage('en')}>en</button>
+      </div>
       <LogoutButton className={styles.button}>{t('Logout')}</LogoutButton>
     </Space>
   </DesignHeader>

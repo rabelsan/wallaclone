@@ -5,7 +5,7 @@ import { MailOutlined, LockOutlined } from '@ant-design/icons';
 import { withNamespaces } from 'react-i18next';
 
 import useForm from '../../../hooks/useForm';
-import styles from './LoginForm.module.css';
+import styles from './SignupForm.module.css';
 
 function LoginForm({ onSubmit, loading, t }) {
   const [form, handleChange] = useForm({

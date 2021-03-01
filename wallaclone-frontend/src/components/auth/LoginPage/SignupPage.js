@@ -11,7 +11,7 @@ import Layout from '../../layout';
 
 function LoginPage ({ onLogin, loading, error, t}) {
   return (
-    <Layout title={t("Login")}>
+    <Layout title={t("Signup")}>
       <LoginForm onSubmit={onLogin} loading={loading}/>
       {error && (
         <Alert
