@@ -1,7 +1,7 @@
 import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 
-import { PrivateRoute, LoginPage } from '../auth';
+import { PrivateRoute, LoginPage, SignupPage } from '../auth';
 import { AdvertPage, AdvertsPage, NewAdvertPage } from '../adverts';
 import NotFoundPage from './NotFoundPage';
 
@@ -14,6 +14,9 @@ function App () {
         </Route>
         <Route path="/login" exact>
             {({ history }) => <LoginPage history={history} />}
+        </Route>
+        <Route path="/signup" exact>
+            {({ history }) => <SignupPage history={history} />}
         </Route>
         <Route path="/adverts" exact component={AdvertsPage} />
         <PrivateRoute path="/adverts/new" exact component={NewAdvertPage} />

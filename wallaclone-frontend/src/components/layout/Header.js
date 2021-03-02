@@ -20,7 +20,7 @@ const Header = ({t}) => (
       <Link to="/adverts/new">{t('New advert')}</Link>
     </Space>
     <Space size="large">
-      <Link to="/">{t('Sign up')}</Link>
+      <Link to="/signup">{t('Sign up')}</Link>
       <Link to="/login">{t('Login')}</Link>
     </Space>
     <Space size="small">

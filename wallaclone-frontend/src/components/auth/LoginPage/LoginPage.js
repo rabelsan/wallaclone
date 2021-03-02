@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux'; 
 import T from 'prop-types';
-import { Alert, Col, Row, Typography } from 'antd';
+import { Alert } from 'antd';
 
 import { login } from '../../../store/actions';
 import LoginForm from './LoginForm';

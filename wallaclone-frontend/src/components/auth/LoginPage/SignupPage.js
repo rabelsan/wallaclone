@@ -1,18 +1,18 @@
 import React from 'react';
 import { connect } from 'react-redux'; 
 import T from 'prop-types';
-import { Alert, Col, Row, Typography } from 'antd';
+import { Alert } from 'antd';
 
 import { login } from '../../../store/actions';
-import LoginForm from './LoginForm';
+import SignupForm from './SignupForm';
 import { getUi } from '../../../store/selectors';
 import { withNamespaces } from 'react-i18next';
 import Layout from '../../layout';
 
-function LoginPage ({ onLogin, loading, error, t}) {
+function SignupPage ({ onLogin, loading, error, t}) {
   return (
-    <Layout title={t("Signup")}>
-      <LoginForm onSubmit={onLogin} loading={loading}/>
+    <Layout title={t("Sign up")}>
+      <SignupForm onSubmit={onLogin} loading={loading}/>
       {error && (
         <Alert
           closable 
@@ -26,7 +26,7 @@ function LoginPage ({ onLogin, loading, error, t}) {
   );
 }
 
-LoginPage.propTypes = {
+SignupPage.propTypes = {
   onLogin: T.func.isRequired,
   loading: T.bool.isRequired,
   error: T.string,
@@ -35,5 +35,5 @@ LoginPage.propTypes = {
 
 export default connect(getUi, dispatch => ({
   onLogin: (crendentials, history) => dispatch(login(crendentials, history)),
-}))(withNamespaces()(LoginPage));
+}))(withNamespaces()(SignupPage));
 
