@@ -6,6 +6,8 @@ import { Layout as DesignLayout, Space } from 'antd';
 import styles from './Header.module.css';
 import { LogoutButton } from '../auth';
 import { withNamespaces } from 'react-i18next';
+//import { getLoggedUserToken } from '../../store/selectors';
+import storage from '../../utils/storage';
 
 const changeLanguage = (lng) => {
   i18n.changeLanguage(lng);

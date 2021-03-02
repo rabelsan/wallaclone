@@ -1,7 +1,7 @@
 import React from 'react';
 import T from 'prop-types';
-import { Input, Button, Checkbox } from 'antd';
-import { MailOutlined, LockOutlined } from '@ant-design/icons';
+import { Input, Button } from 'antd';
+import { UserOutlined, MailOutlined, LockOutlined } from '@ant-design/icons';
 import { withNamespaces } from 'react-i18next';
 
 import useForm from '../../../hooks/useForm';
@@ -9,15 +9,16 @@ import styles from './SignupForm.module.css';
 
 function LoginForm({ onSubmit, loading, t }) {
   const [form, handleChange] = useForm({
+    name: '',
     email: '',
     password: '',
     remember: false,
   });
-  const { email, password, remember } = form;
-  const credentials = { email, password, remember };
+  const { name, email, password, password2, remember } = form;
+  const credentials = { name, email, password, remember };
 
   const canSubmit = () => {
-    return !loading && email && password;
+    return !loading && email && password && password2 && (password === password2);
   };
 
   const handleSubmit = ev => {
@@ -27,6 +28,15 @@ function LoginForm({ onSubmit, loading, t }) {
 
   return (
     <form onSubmit={handleSubmit} className={styles.input}>
+      <Input 
+        inputType={null}
+        name="user"
+        className="styles.input"
+        prefix={<UserOutlined />}
+        placeholder={t("Nickname")}
+        onChange={handleChange}
+        value={name}
+      />
       <Input 
         inputType={null}
         name="email"
@@ -45,14 +55,15 @@ function LoginForm({ onSubmit, loading, t }) {
         onChange={handleChange}
         value={password}
       />
-      <Checkbox
-        name="remember"
-        className={styles.input}
+      <Input
+        inputType="Password"
+        name="password2"
+        className="styles.input"
+        prefix={<LockOutlined />}
+        placeholder={t("Verify password")}
         onChange={handleChange}
-        checked={remember}
-      >
-        {t('Remember me')}
-      </Checkbox>
+        value={password2}
+      />
       <Button type="primary" htmlType="submit" disabled={!canSubmit()} block>
         {t('Log In')}
       </Button>

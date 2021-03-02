@@ -39,5 +39,8 @@
     "Up!":"¡Subir!",
     "Ups! Something went wrong.":"¡Vaya! Algo ha ido mal.",
     "Sign up":"Registrarse",
-    "Login":"Iniciar sesión"        
+    "Login":"Iniciar sesión",
+    "Verify password":"Verificar contraseña",
+    "Email or Nickname required":"Introduzca Email o Usuario",
+    "Nickname":"Nickname"        
 }

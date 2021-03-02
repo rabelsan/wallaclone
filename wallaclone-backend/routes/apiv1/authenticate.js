@@ -10,26 +10,34 @@ const Usuario = require('../../models/Usuario');
 // POST /auth/login
 router.post('/login', async (req, res, next) => {
   try {
-    const email = req.body.email;
+    const nameOrEmail = req.body.email;
     const password = req.body.password;
 
-    // hacemos un hash de la password
+    // Password hash
     const hashedPassword = Usuario.hashPassword(password);
 
-    const user = await Usuario.findOne({
-      email: email,
+    // First try with user name
+    var user = await Usuario.findOne({
+      name: nameOrEmail,
       password: hashedPassword,
     });
 
+    // If not, check user email
     if (!user) {
-      // Respondemos que no son validas las credenciales
-      res.json({ ok: false, error: 'invalid credentials' });
-      return;
+      user = await Usuario.findOne({
+        email: nameOrEmail,
+        password: hashedPassword,
+      });
+      if (!user) {
+        // Reply that credential are wrong
+        res.json({ ok: false, error: 'invalid credentials' });
+        return;
+      }
     }
 
-    // el usuario está y coincide la password
+    // User exists and password matches
 
-    // creamos el token
+    // Create the token
     jwt.sign(
       { _id: user._id },
       process.env.JWT_SECRET,
@@ -40,7 +48,7 @@ router.post('/login', async (req, res, next) => {
         if (err) {
           return next(err);
         }
-        // respondemos con un JWT
+        // Replay with JWT token
         res.json({ ok: true, token: token });
       },
     );

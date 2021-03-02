@@ -32,7 +32,7 @@ function LoginForm({ onSubmit, loading, t }) {
         name="email"
         className="styles.input"
         prefix={<MailOutlined />}
-        placeholder={t("Email")}
+        placeholder={t("Email or Nickname required")}
         onChange={handleChange}
         value={email}
       />

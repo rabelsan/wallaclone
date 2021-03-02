@@ -39,5 +39,8 @@
     "Up!":"Up!",
     "Ups! Something went wrong.":"Ups! Something went wrong.",
     "Sign up":"Sign up",
-    "Login":"Login"
+    "Login":"Login",
+    "Verify password":"Verify password",
+    "Email or Nickname required":"Email or Nickname required",
+    "Nickname":"Nickname"
 }
