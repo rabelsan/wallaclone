@@ -19,5 +19,15 @@
 }
 
 .div {
-  margin-left: 10px;
+  margin-left: 10px; 
 }
+
+.disableCursor {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.enableCursor {
+  cursor: default;
+}
+  

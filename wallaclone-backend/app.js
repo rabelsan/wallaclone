@@ -89,7 +89,7 @@ app.use(function (err, req, res, next) {
   res.render('error');
 });
 
-function isAPI(req) {
+function isAPI (req) {
   return req.originalUrl.indexOf('/api') === 0;
 }
 

@@ -36,7 +36,6 @@ router.post('/login', async (req, res, next) => {
     }
 
     // User exists and password matches
-
     // Create the token
     jwt.sign(
       { _id: user._id },
@@ -49,9 +48,55 @@ router.post('/login', async (req, res, next) => {
           return next(err);
         }
         // Replay with JWT token
-        res.json({ ok: true, token: token });
+        res.json({ ok: true, token: token, id: user._id });
       },
     );
+  } catch (err) {
+    next(err);
+  }
+});
+
+// POST /auth/signup
+router.post('/signup', async (req, res, next) => {
+  try {
+    const name = req.body.nickname;
+    const email = req.body.email;
+    const password = req.body.password;
+
+    // Password hash
+    const hashedPassword = Usuario.hashPassword(password);
+
+    // First try with user name
+    var user = null;
+    if (name) {
+      user = await Usuario.findOne({
+        name: name,
+      });
+    }
+
+    // If not, check user email
+    if (!user) {
+      user = await Usuario.findOne({
+        email: email,
+      });
+      if (!user) {
+        // Insert new user
+        var result = await Usuario.insertMany([{
+          name: name, email: email, password: hashedPassword
+        }])
+        if (!result) {
+          res.json({ ok: false, error: `Error saving ${email}. Please, try again.` });
+          return;
+        }
+      } else {
+        res.json({ ok: false, error: `Email ${email} already registered!` });
+        return;
+      }
+    } else {
+      res.json({ ok: false, error: `Nickname ${name} already registered!` });
+      return;
+    }
+    res.json({ok: true, error: null});
   } catch (err) {
     next(err);
   }

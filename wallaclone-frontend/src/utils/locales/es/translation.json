@@ -42,5 +42,6 @@
     "Login":"Iniciar sesión",
     "Verify password":"Verificar contraseña",
     "Email or Nickname required":"Introduzca Email o Usuario",
-    "Nickname":"Nickname"        
+    "Nickname":"Usuario",
+    "Edit user":"Editar usuario"        
 }

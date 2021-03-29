@@ -1,11 +1,15 @@
 import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 import { PrivateRoute, LoginPage, SignupPage } from '../auth';
 import { AdvertPage, AdvertsPage, NewAdvertPage } from '../adverts';
 import NotFoundPage from './NotFoundPage';
+import { getLoggedUserId } from '../../store/selectors';
 
 function App () {
+  const loggedUserId = useSelector(getLoggedUserId);
+
   return (
     <div className="App">
       <Switch>
@@ -16,7 +20,7 @@ function App () {
             {({ history }) => <LoginPage history={history} />}
         </Route>
         <Route path="/signup" exact>
-            {({ history }) => <SignupPage history={history} />}
+            {({ history }) => <SignupPage loggedUserId={loggedUserId} history={history} />}
         </Route>
         <Route path="/adverts" exact component={AdvertsPage} />
         <PrivateRoute path="/adverts/new" exact component={NewAdvertPage} />

@@ -1,6 +1,14 @@
+export const AUTH_SIGNUP_REQUEST = 'auth/SIGNUP_REQUEST';
+export const AUTH_SIGNUP_SUCCESS = 'auth/SIGNUP_SUCCESS';
+export const AUTH_SIGNUP_FAILURE = 'auth/SIGNUP_FAILURE';
+
 export const AUTH_LOGIN_REQUEST = 'auth/LOGIN_REQUEST';
 export const AUTH_LOGIN_SUCCESS = 'auth/LOGIN_SUCCESS';
 export const AUTH_LOGIN_FAILURE = 'auth/LOGIN_FAILURE';
+
+export const AUTH_EDITUSER_REQUEST = 'auth/EDITUSER_REQUEST';
+export const AUTH_EDITUSER_SUCCESS = 'auth/EDITUSER_SUCCESS';
+export const AUTH_EDITUSER_FAILURE = 'auth/EDITUSER_FAILURE';
 
 export const AUTH_LOGOUT = 'auth/LOGOUT';
 

@@ -3,16 +3,16 @@ import { connect } from 'react-redux';
 import T from 'prop-types';
 import { Alert } from 'antd';
 
-import { login } from '../../../store/actions';
+import { signup, editUser } from '../../../store/actions';
 import SignupForm from './SignupForm';
 import { getUi } from '../../../store/selectors';
 import { withNamespaces } from 'react-i18next';
 import Layout from '../../layout';
 
-function SignupPage ({ onLogin, loading, error, t}) {
+function SignupPage ({ loggedUserId, onSignup, onEditUser, loading, error, t}) {
   return (
-    <Layout title={t("Sign up")}>
-      <SignupForm onSubmit={onLogin} loading={loading}/>
+    <Layout title={t(loggedUserId ? 'Edit user' : 'Sign up')}>
+      <SignupForm loggedUserId={loggedUserId} onSubmit={loggedUserId ? onEditUser: onSignup} loading={loading}/>
       {error && (
         <Alert
           closable 
@@ -27,13 +27,15 @@ function SignupPage ({ onLogin, loading, error, t}) {
 }
 
 SignupPage.propTypes = {
-  onLogin: T.func.isRequired,
+  onSignup: T.func.isRequired,
+  onEditUser: T.func.isRequired,
   loading: T.bool.isRequired,
   error: T.string,
   history: T.shape({ replace: T.func.isRequired }).isRequired,
 };
 
 export default connect(getUi, dispatch => ({
-  onLogin: (crendentials, history) => dispatch(login(crendentials, history)),
+  onSignup: (crendentials, history) => dispatch(signup(crendentials, history)),
+  onEditUser: (crendentials, history) => dispatch(editUser(crendentials, history)),
 }))(withNamespaces()(SignupPage));
 

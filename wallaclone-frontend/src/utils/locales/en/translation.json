@@ -42,5 +42,6 @@
     "Login":"Login",
     "Verify password":"Verify password",
     "Email or Nickname required":"Email or Nickname required",
-    "Nickname":"Nickname"
+    "Nickname":"Nickname",
+    "Edit user":"Edit user"
 }

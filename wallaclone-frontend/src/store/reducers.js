@@ -1,7 +1,10 @@
 import * as types from './types';
 
 const initialState = {
-  auth: null,
+  auth: {
+    token: null,
+    id: null,
+  },
   ads: {
     adverts: [],
     loading: false,
@@ -27,10 +30,10 @@ export const auth = (state = initialState.auth, action) => {
   switch (action.type) {
     case types.AUTH_LOGIN_SUCCESS:
       // login
-      return action.payload;
+      return { ...state, token: action.payload.token, id: action.payload.id };
     case types.AUTH_LOGOUT:
       // logout
-      return null;
+      return { ...state, token: null, id: null };
     default:
       return state;
   }
@@ -97,6 +100,10 @@ export const ui = (state = initialState.ui, action) => {
       case types.AUTH_LOGIN_REQUEST:
         return { ...state, error: null, loading: true };
       case types.AUTH_LOGIN_SUCCESS:
+        return { ...state, error: null, loading: false };
+      case types.AUTH_SIGNUP_REQUEST:
+        return { ...state, error: null, loading: true };
+      case types.AUTH_SIGNUP_SUCCESS:
         return { ...state, error: null, loading: false };
       default:
         return state;

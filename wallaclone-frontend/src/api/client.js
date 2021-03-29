@@ -35,6 +35,12 @@ client.logout = () =>
     resolve();
   });
 
+  // Signup method
+client.signup = credentials => 
+  client.post('/auth/signup', credentials).then(sign => 
+  sign
+);
+
 // Intercepts response
 client.interceptors.response.use(
   ({ data: { ok, ...result } }) => {
